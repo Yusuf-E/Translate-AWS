@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/item_home"
+        android:title="AnaSayfa"
+    />
+    <item
+        android:id="@+id/learn"
+        android:icon="@drawable/item_learn"
+        android:title="Öğren" />
+    <item
+        android:id="@+id/words"
+        android:icon="@drawable/item_words"
+        android:title="Öğrenilen Kelimeler"
+        />
+    <item
+        android:id="@+id/saved"
+        android:icon="@drawable/item_saved"
+        android:title="Kaydedilenler"
+        />
+
+</menu>
