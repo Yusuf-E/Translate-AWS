@@ -1,6 +1,7 @@
 package com.example.translate;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,16 +27,21 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class MainActivity extends AppCompatActivity {
-
+    String firstLanguage,secondLanguage;
+    Button firstLanguageButton,secondLanguageButton;
+    int a;
+    RadioButton radioButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initBottomNavView();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
+        initCreateButton();
 
     }
-        private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
@@ -52,9 +63,39 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         };
+
     private void initBottomNavView() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navlistener);
     }
+
+    private void alert(int b){
+        a=b;
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.languages,null);
+        final RadioGroup radioGroup = view.findViewById(R.id.languages);
+        Button buttonApply = view.findViewById(R.id.button_apply);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setView(view);
+        alert.setCancelable(false);
+        AlertDialog alertDialog = alert.create();
+        buttonApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int radioId = radioGroup.getCheckedRadioButtonId();
+                radioButton=view.findViewById(radioId);
+                if (a == 1){
+                    firstLanguage = ((String) radioButton.getText());
+                    firstLanguageButton.setText(firstLanguage);
+                }
+                else {
+                    secondLanguage = ((String) radioButton.getText());
+                    secondLanguageButton.setText(secondLanguage);
+                }
+            }
+        });
+        alertDialog.show();
+    }
+
 
 }
