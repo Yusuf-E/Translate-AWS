@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
-    private Button firstLanguageButton,secondLanguageButton;
+     Button firstLanguageButton,secondLanguageButton;
 
     @Nullable
     @Override
@@ -21,22 +21,22 @@ public class HomeFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_home,container,false);
         firstLanguageButton= ((Button) v.findViewById(R.id.button));
         secondLanguageButton= ((Button) v.findViewById(R.id.button2));
-        return  v;
-    }
-    private void initCreateButton() {
         firstLanguageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert(1);
+                ((MainActivity) getActivity()).alert(1);
 
             }
         });
         secondLanguageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert(0);
+                ((MainActivity) getActivity()).alert(0);
             }
         });
+        return  v;
     }
 
-}
+
+    }
+

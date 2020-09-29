@@ -27,18 +27,18 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class MainActivity extends AppCompatActivity {
-    String firstLanguage,secondLanguage;
+    private String language;
     Button firstLanguageButton,secondLanguageButton;
+    String firstLanguage,secondLanguage;
     int a;
     RadioButton radioButton;
+    RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initBottomNavView();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
-        initCreateButton();
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,33 +69,40 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navlistener);
     }
 
-    private void alert(int b){
+    public void alert(int b){
         a=b;
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.languages,null);
-        final RadioGroup radioGroup = view.findViewById(R.id.languages);
+        radioGroup = view.findViewById(R.id.languages);
         Button buttonApply = view.findViewById(R.id.button_apply);
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setView(view);
-        alert.setCancelable(false);
         AlertDialog alertDialog = alert.create();
         buttonApply.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton=view.findViewById(radioId);
+                firstLanguage=radioButton.getText().toString();
                 if (a == 1){
-                    firstLanguage = ((String) radioButton.getText());
+                    firstLanguageButton=findViewById(R.id.button);
                     firstLanguageButton.setText(firstLanguage);
                 }
                 else {
-                    secondLanguage = ((String) radioButton.getText());
+                    secondLanguageButton=findViewById(R.id.button2);
+                    secondLanguage = radioButton.getText().toString();
                     secondLanguageButton.setText(secondLanguage);
                 }
             }
         });
+
         alertDialog.show();
     }
 
 
+    public void checkButton(View view) {
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButton=view.findViewById(radioId);
+        System.out.println(radioButton.getText());
+    }
 }
