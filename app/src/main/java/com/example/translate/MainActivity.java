@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonApply = view.findViewById(R.id.button_apply);
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setView(view);
-        AlertDialog alertDialog = alert.create();
+        final AlertDialog alertDialog = alert.create();
         buttonApply.setOnClickListener(new View.OnClickListener() {
 
 
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     secondLanguage = radioButton.getText().toString();
                     secondLanguageButton.setText(secondLanguage);
                 }
+                alertDialog.cancel();
             }
         });
 
