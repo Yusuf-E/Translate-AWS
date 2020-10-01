@@ -9,16 +9,23 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.predictions.aws.AWSPredictionsPlugin;
+import com.amplifyframework.predictions.models.LanguageType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
@@ -26,10 +33,15 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
     private String language;
+    EditText editText ;
     Button firstLanguageButton,secondLanguageButton;
-    String firstLanguage,secondLanguage;
+    String firstLanguage,secondLanguage,resultText;
+    TextView  translatedText,previousText;
     int a;
     RadioButton radioButton;
     RadioGroup radioGroup;
@@ -37,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        amplifyConfig();
         initBottomNavView();
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
     }
@@ -83,9 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                firstLanguage=radioButton.getText().toString();
+
+                translatedText= ((TextView) view.findViewById(R.id.translatedText));
+                previousText= ((TextView) view.findViewById(R.id.previousText));
+                editText = ((EditText) view.findViewById(R.id.translateText));
                 if (a == 1){
                     firstLanguageButton=findViewById(R.id.button);
+                    firstLanguage=radioButton.getText().toString();
                     firstLanguageButton.setText(firstLanguage);
                 }
                 else {
@@ -105,5 +122,35 @@ public class MainActivity extends AppCompatActivity {
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton=view.findViewById(radioId);
         System.out.println(radioButton.getText());
+    }
+    private void amplifyConfig(){
+        try {
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSPredictionsPlugin());
+
+            Amplify.configure(getApplicationContext());
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }
+    }
+    public void translateText(String firstLanguage , String secondLanguage,String text){
+        System.out.println(text);
+        Amplify.Predictions.translateText(
+                text,
+                LanguageType.valueOf(firstLanguage),
+                LanguageType.valueOf(secondLanguage),
+                result ->{
+                    Log.i("MyAmplifyApp", result.getTranslatedText());
+                    resultText=result.getTranslatedText();
+
+
+                    },
+                error -> Log.e("MyAmplifyApp", "Translation failed", error)
+
+
+        );
+
+
     }
 }
