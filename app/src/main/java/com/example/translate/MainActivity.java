@@ -106,9 +106,12 @@ public class MainActivity extends AppCompatActivity {
                     firstLanguageButton.setText(firstLanguage);
                 }
                 else {
-                    secondLanguageButton=findViewById(R.id.button2);
-                    secondLanguage = radioButton.getText().toString();
-                    secondLanguageButton.setText(secondLanguage);
+                    if (radioButton.isChecked()){
+                        secondLanguageButton=findViewById(R.id.button2);
+                        secondLanguage = radioButton.getText().toString();
+                        secondLanguageButton.setText(secondLanguage);
+                    }
+
                 }
                 alertDialog.cancel();
             }

@@ -32,8 +32,8 @@
             android:id="@+id/radioButton13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="English"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Turkish"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -48,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="French"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -55,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="German"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -62,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Italian"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -69,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Spanish"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
         <RadioButton
@@ -76,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Russian"
+            android:textStyle="bold"
             android:onClick="checkButton"/>
 
     </RadioGroup>
