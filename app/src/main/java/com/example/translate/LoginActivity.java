@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                dologin();
+                dologin();
             }
         });
 
@@ -58,5 +58,27 @@ public class LoginActivity extends AppCompatActivity {
         passError = (TextInputLayout) findViewById(R.id.passError);
     }
 
+    private void dologin() {
+        loginAuth = FirebaseAuth.getInstance();
+        email=emailTextLogin.getText().toString();
+        password=passwordTextLogin.getText().toString();
 
+        if(!(email.isEmpty())&&!(password.isEmpty())){
+            loginAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        System.out.println("Giriş Başarılı");
+                        Toast.makeText(LoginActivity.this,"Giriş Başarılı",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        System.out.println("Giriş Başarısız");
+                        Toast.makeText(LoginActivity.this,"Giriş Başarısız",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
 }
