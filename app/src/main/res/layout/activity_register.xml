@@ -69,27 +69,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <EditText
-                    android:id="@+id/phone"
-                    android:background="@drawable/edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/phone_number"
-                    android:maxLength="12"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:paddingStart="5dp"
-                    android:singleLine="true"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

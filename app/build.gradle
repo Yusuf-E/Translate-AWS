@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -67,8 +68,8 @@ dependencies {
 //    implementation 'com.amplifyframework:aws-api:1.1.1'
   implementation 'com.amplifyframework:aws-predictions:1.4.0'
  implementation 'com.amplifyframework:aws-auth-cognito:1.4.0'
-
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
+//firebase
+    implementation 'com.google.firebase:firebase-database:19.5.0'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
 
 }
