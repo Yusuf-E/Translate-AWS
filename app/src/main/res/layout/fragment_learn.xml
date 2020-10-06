@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/learnfragment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/questionText"
         android:layout_width="411dp"
         android:layout_height="163dp"
         android:layout_marginTop="16dp"
@@ -15,31 +16,33 @@
         android:gravity="center"
         android:text="Learn"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/answerText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/answerText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="15dp"
+        android:singleLine="true"
+
         android:layout_marginTop="32dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/textview_border"
         android:gravity="top|left"
         android:textStyle="bold"
         android:hint="Cevabınızı Buraya yazunız"
-        app:layout_constraintBottom_toTopOf="@+id/angry_btn"
+        app:layout_constraintBottom_toTopOf="@+id/answerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
 
     <Button
-        android:id="@+id/angry_btn"
+        android:id="@+id/answerButton"
 
         android:layout_width="270dp"
         android:layout_height="60dp"
