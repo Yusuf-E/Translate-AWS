@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,24 +12,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.security.Signature;
-
 public class RegisterActivity extends AppCompatActivity {
     EditText emailTextRegister,nameTextRegister,passwordTextRegister;
     Button register;
     String password;
     TextView login;
+    User user;
     private FirebaseAuth registerAuth;
     private DatabaseReference ref;
     private FirebaseDatabase database;
     private String userUid;
+    private int score=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
         ref=database.getReference();
         if (userUid!=null){
-            User user = new User(emailTextRegister.getText().toString(),nameTextRegister.getText().toString(),password);
+             user = new User(emailTextRegister.getText().toString(),nameTextRegister.getText().toString(),password,score);
             ref.child("users").child(userUid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -88,7 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
             System.out.println("Userid Boş amk ");
         }
     }
-
+    public String userReturn(){
+        return  userUid;
+    }
     private void initView() {
         emailTextRegister= ((EditText) findViewById(R.id.email));
         nameTextRegister= ((EditText) findViewById(R.id.name));

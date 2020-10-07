@@ -20,16 +20,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.EventListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class LearnFragment extends Fragment {
+    User user1;
+    FirebaseUser user;
     EditText answerText;
     TextView questionText;
     Button answerButton;
@@ -58,6 +62,24 @@ public class LearnFragment extends Fragment {
         return v;
     }
 
+    private void updateScore() {
+        user= registerAuth.getCurrentUser();
+        database=FirebaseDatabase.getInstance();
+        ref=database.getReference().child("users").child(userUid);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 user1 = snapshot.getValue(User.class);
+                 ref.child("score").setValue(user1.score+5);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void updateQuestion() {
         constraintLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
         if (total>4){
@@ -81,9 +103,11 @@ public class LearnFragment extends Fragment {
                                 if (answerText.getText().toString().replaceAll(" ","").equalsIgnoreCase(question.getAnswer())){
                                     player.start();
                                     total++;
+                                    updateScore();
                                     Handler handler = new Handler();
 
                                             constraintLayout.setBackgroundColor(Color.parseColor("#32CD32"));
+
                                     Handler handler1 = new Handler();
                                     handler1.postDelayed(new Runnable() {
                                         @Override
