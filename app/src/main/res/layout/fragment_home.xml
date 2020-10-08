@@ -114,6 +114,15 @@
             app:layout_constraintEnd_toEndOf="@+id/translateText"
             app:srcCompat="@drawable/arrow" />
 
+        <ImageButton
+            android:id="@+id/favButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/translatedText"
+            app:layout_constraintEnd_toEndOf="@+id/translatedText"
+            app:layout_constraintTop_toTopOf="@+id/translatedText"
+            app:srcCompat="@android:drawable/star_off" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

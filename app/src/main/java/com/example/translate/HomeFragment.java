@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -15,18 +16,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 public class HomeFragment extends Fragment {
     EditText editText ;
     TextView previousText,translatedText;
      Button firstLanguageButton,secondLanguageButton;
      Switch switchButton;
-     ImageButton translateButton;
+     ImageButton translateButton,favButton;
     String text,firstLanguage,secondLanguage;
+    private String useruid1;
+    private FirebaseAuth registerAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
+    private String userUid ;
 
     @Nullable
     @Override
@@ -37,9 +48,29 @@ public class HomeFragment extends Fragment {
         switchButton= ((Switch) v.findViewById(R.id.switch1));
         translateButton= ((ImageButton) v.findViewById(R.id.translateButton));
         editText = ((EditText) v.findViewById(R.id.translateText));
-
+        favButton = ((ImageButton) v.findViewById(R.id.favButton));
         translatedText= ((TextView) v.findViewById(R.id.translatedText));
         previousText= ((TextView) v.findViewById(R.id.previousText));
+
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (translatedText!=null){
+                       UUID uuid = UUID.randomUUID();
+                       useruid1 = uuid.toString();
+                       userUid=FirebaseAuth.getInstance().getUid();
+                       database= FirebaseDatabase.getInstance();
+                       ref=database.getReference();
+//                    userUid=registerAuth.getCurrentUser().getUid();
+                    if (translatedText.getText().toString()!=null&&(!translatedText.getText().toString().equals(""))){
+                        SavedWords savedWords = new SavedWords(translatedText.getText().toString(),previousText.getText().toString());
+                        ref.child("UserWords").child(userUid).child(useruid1).setValue(savedWords);
+                    }
+
+                }
+            }
+        });
         translateButton.setOnClickListener(new View.OnClickListener() {
             private String resultText;
 

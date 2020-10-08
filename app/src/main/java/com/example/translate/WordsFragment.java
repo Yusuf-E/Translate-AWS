@@ -49,7 +49,11 @@ public class WordsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recylerView = ((RecyclerView) view.findViewById(R.id.recyclerView));
-        recylerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recylerView.setLayoutManager(linearLayoutManager);
+        //recylerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         adapter = new GroupAdapter<GroupieViewHolder>();
         recylerView.setAdapter(adapter);
 
@@ -59,13 +63,15 @@ public class WordsFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                queue= (int) snapshot.getChildrenCount();
                 for (DataSnapshot child : snapshot.getChildren()) {
+
                     System.out.println((child.child("score").getValue()));
                     System.out.println(child.child("username").getValue().toString());
                     if ((child.child("username").getValue().toString())!=null){
-                        queue++;
                         adapter.add(new Score(queue,child.child("username").getValue().toString(),child.child("score").getValue().toString()));
-                    }
+                        queue--;
+                        }
                 }
             }
 
