@@ -100,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
                 translatedText= ((TextView) view.findViewById(R.id.translatedText));
                 previousText= ((TextView) view.findViewById(R.id.previousText));
                 editText = ((EditText) view.findViewById(R.id.translateText));
-                if (a == 1){
+                if (a == 1&&radioButton!=null){
                     firstLanguageButton=findViewById(R.id.button);
                     firstLanguage=radioButton.getText().toString();
                     firstLanguageButton.setText(firstLanguage);
                 }
                 else {
-                    if (radioButton.isChecked()){
+                    if (radioButton!=null&&a==0){
                         secondLanguageButton=findViewById(R.id.button2);
                         secondLanguage = radioButton.getText().toString();
                         secondLanguageButton.setText(secondLanguage);

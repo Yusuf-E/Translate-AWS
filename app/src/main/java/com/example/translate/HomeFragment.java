@@ -87,7 +87,6 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void run(){
-
                         if ( ((MainActivity) getActivity()).resultText!=null) {
                             previousText.setText(text);
                             translatedText.setText(((MainActivity) getActivity()).resultText);
