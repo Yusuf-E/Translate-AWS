@@ -79,12 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         System.out.println("Kullanıcı Database kaydedildi..");}
                     else{
-                        System.out.println("Başaramadık abi..");
+                        System.out.println("error...");
                     }
                 }
             });
         }else{
-            System.out.println("Userid Boş amk ");
+            System.out.println("Userid has no useruid... ");
         }
     }
     public String userReturn(){

@@ -47,9 +47,7 @@ package com.example.translate;
             this.email=email;
             this.password=password;
             this.score=score;
-
         }
-
     }
 
 
