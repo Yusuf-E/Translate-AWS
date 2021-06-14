@@ -1,9 +1,7 @@
 # Translate-AWS
-<img src = "images/register.png" width="300" height="500"/>
-<img src = "images/login.png" width="300" height="500" />
-<img src = "images/languages.png" width="300" height="500" />
-<img src = "images/home.png" width="300" height="500">
-<img src = "images/learn.png" width="300" height="500">
-<img src = "images/saved.png" width="300" height="500">
-
- 
+![ScreenShot1](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/home.png)
+![ScreenShot2](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/languages.png)
+![ScreenShot3](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/learn.png)
+![ScreenShot4](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/login.png)
+![ScreenShot5](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/register.png)
+![ScreenShot6](https://github.com/Yusuf-E/Translate-AWS/blob/master/images/saved.png)
